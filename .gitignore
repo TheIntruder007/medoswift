@@ -1,0 +1,11 @@
+node_modules
+.env
+/server/.env
+/client/node_modules
+/client/dist
+dist/
+build/
+coverage/
+.DS_Store
+uploads/
+eng.traineddata
