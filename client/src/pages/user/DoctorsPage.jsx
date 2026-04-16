@@ -114,9 +114,14 @@ export default function DoctorsPage() {
               <Card key={s} className="p-6 aspect-square cursor-pointer hover:shadow-md flex flex-col" onClick={() => { setSelectedSpecialization(s); }}>
                 <div className="relative w-full flex-1 flex items-center justify-center -mx-6 mt-0">
                   {imgSrc ? (
-                    <img src={imgSrc} alt={s} className="max-w-full max-h-full object-contain rounded-md" />
+                    <img 
+                      src={imgSrc} 
+                      alt={s} 
+                      className="max-w-full max-h-full object-contain rounded-md" 
+                      onError={(e) => { e.currentTarget.src = "/images/fallback.png"; }} 
+                    />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center text-sm text-slate-400">Waiting for image</div>
+                    <img src="/images/fallback.png" alt="Fallback" className="max-w-full max-h-full object-contain rounded-md" />
                   )}
 
                   {user?.role === 'admin' && (
@@ -153,9 +158,14 @@ export default function DoctorsPage() {
               <Card key={s} className="p-6 aspect-square cursor-pointer hover:shadow-md flex flex-col" onClick={() => { setSelectedSpecialization(s); }}>
                 <div className="relative w-full flex-1 flex items-center justify-center -mx-6 mt-0">
                   {imgSrc ? (
-                    <img src={imgSrc} alt={s} className="max-w-full max-h-full object-contain rounded-md" />
+                    <img 
+                      src={imgSrc} 
+                      alt={s} 
+                      className="max-w-full max-h-full object-contain rounded-md" 
+                      onError={(e) => { e.currentTarget.src = "/images/fallback.png"; }} 
+                    />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center text-sm text-slate-400">Waiting for image</div>
+                    <img src="/images/fallback.png" alt="Fallback" className="max-w-full max-h-full object-contain rounded-md" />
                   )}
 
                   {user?.role === 'admin' && (

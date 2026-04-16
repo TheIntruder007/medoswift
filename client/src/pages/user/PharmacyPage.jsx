@@ -135,9 +135,14 @@ export default function PharmacyPage() {
               <Card key={c} className="p-4 h-44 cursor-pointer hover:shadow-md flex flex-col" onClick={() => { setSelectedCategory(c); setCategory(c); setPage(1); }}>
                 <div className="relative w-full flex-1 flex items-center justify-center overflow-hidden mt-0">
                   {imgSrc ? (
-                    <img src={imgSrc} alt={c} className="max-w-full max-h-full object-contain rounded-md" />
+                    <img 
+                      src={imgSrc} 
+                      alt={c} 
+                      className="max-w-full max-h-full object-contain rounded-md" 
+                      onError={(e) => { e.currentTarget.src = "/images/fallback.png"; }} 
+                    />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center text-sm text-slate-400">Waiting for image</div>
+                    <img src="/images/fallback.png" alt="Fallback" className="max-w-full max-h-full object-contain rounded-md" />
                   )}
 
                   {user?.role === 'admin' && (

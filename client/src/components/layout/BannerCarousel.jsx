@@ -44,9 +44,14 @@ export default function BannerCarousel({ className = "" }) {
       <AnimatePresence initial={false} mode="wait">
         <motion.div key={currentKey} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.4 }}>
           {imgSrc ? (
-            <img src={imgSrc} alt={currentKey} className="w-full h-[220px] md:h-[300px] lg:h-[360px] object-cover object-center bg-white" />
+            <img 
+              src={imgSrc} 
+              alt={currentKey} 
+              className="w-full h-[220px] md:h-[300px] lg:h-[360px] object-cover object-center bg-white" 
+              onError={(e) => { e.currentTarget.src = "/images/fallback.png"; }}
+            />
           ) : (
-            <div className="w-full h-[220px] md:h-[300px] lg:h-[360px] bg-slate-50 flex items-center justify-center text-slate-400">Promotional banner</div>
+            <img src="/images/fallback.png" alt="Fallback" className="w-full h-[220px] md:h-[300px] lg:h-[360px] object-cover object-center bg-white" />
           )}
         </motion.div>
       </AnimatePresence>

@@ -89,9 +89,14 @@ export default function UserHome() {
             <Card key={b.to} className={CARD_STYLE} onClick={() => nav(b.to)}>
               <div className="relative w-full flex-1 flex items-center justify-center overflow-hidden mt-0">
                 {imgSrc ? (
-                  <img src={imgSrc} alt={b.label} className="max-w-full max-h-full object-contain rounded-md" />
+                  <img 
+                    src={imgSrc} 
+                    alt={b.label} 
+                    className="max-w-full max-h-full object-contain rounded-md" 
+                    onError={(e) => { e.currentTarget.src = "/images/fallback.png"; }} 
+                  />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center text-sm text-slate-400">Waiting for image</div>
+                  <img src="/images/fallback.png" alt="Fallback" className="max-w-full max-h-full object-contain rounded-md" />
                 )}
 
                 {user?.role === 'admin' && (
@@ -140,13 +145,16 @@ export default function UserHome() {
           return (
             <Card key={b.to} className={CARD_STYLE} onClick={() => nav(b.to)}>
               <div className="relative w-full flex-1 flex items-center justify-center overflow-hidden mt-0">
-                {imgSrc ? (
-                  <img src={imgSrc} alt={b.label} className="max-w-full max-h-full object-contain rounded-md" />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center text-sm text-slate-400">
-                    {b.isCart ? <ShoppingCart size={48} className="text-slate-200" /> : 'Waiting for image'}
-                  </div>
-                )}
+        {imgSrc ? (
+          <img 
+            src={imgSrc} 
+            alt={b.label} 
+            className="max-w-full max-h-full object-contain rounded-md" 
+            onError={(e) => { e.currentTarget.src = "/images/fallback.png"; }} 
+          />
+        ) : (
+          <img src="/images/fallback.png" alt="Fallback" className="max-w-full max-h-full object-contain rounded-md" />
+        )}
 
                 {user?.role === 'admin' && (
                   <div className="absolute top-2 right-2">
@@ -192,7 +200,16 @@ export default function UserHome() {
             <div className="promo-circle" aria-hidden>
               {promoImages.length ? (
                 promoImages.map((src, i) => (
-                  <img key={src} src={src} alt={`promo-${i}`} loading="lazy" width="200" height="200" className={i === promoIndex ? 'active' : ''} />
+                  <img 
+                    key={src} 
+                    src={src || "/images/fallback.png"} 
+                    alt={`promo-${i}`} 
+                    loading="lazy" 
+                    width="200" 
+                    height="200" 
+                    className={i === promoIndex ? 'active' : ''} 
+                    onError={(e) => { e.currentTarget.src = "/images/fallback.png"; }}
+                  />
                 ))
               ) : (
                 <div className="w-full h-full flex items-center justify-center text-sm text-slate-400">No promos</div>
