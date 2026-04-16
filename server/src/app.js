@@ -43,7 +43,7 @@ export function createApp() {
   }));
 
   app.use(cors({
-    origin: env.clientUrl,
+    origin: [env.clientUrl, "https://medoswift.pages.dev", "http://localhost:5173", process.env.CLIENT_URL],
     credentials: true,
   }));
 

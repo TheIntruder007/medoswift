@@ -122,7 +122,7 @@ export default function PrescriptionsPage() {
                 <div className="text-xs text-slate-500 mt-1">{new Date(p.createdAt).toLocaleString()}</div>
               </div>
               {p.imageUrl && (
-                <a className="text-sm text-brand-800 font-semibold" href={(import.meta.env.VITE_API_URL || "http://localhost:5000") + p.imageUrl} target="_blank" rel="noreferrer">
+                <a className="text-sm text-brand-800 font-semibold" href={(import.meta.env.VITE_API_URL || "https://medoswift-api.onrender.com") + p.imageUrl} target="_blank" rel="noreferrer">
                   View file
                 </a>
               )}

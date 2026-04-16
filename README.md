@@ -1,63 +1,78 @@
-# MedoSwift (MERN)
+# Medoswift
 
-Online medical consultation + medicine delivery platform with JWT auth + RBAC (User/Doctor/Admin), booking, pharmacy, prescription OCR, organizer subscription/reminders, orders + live tracking (Leaflet + OpenStreetMap).
+Medoswift is a full-stack web application designed for comprehensive healthcare management. It provides a seamless interface for users, doctors, pharmacies, and administrators to interact, schedule appointments, order medicines, and manage medical records.
 
-## Tech
-- **Client**: React + Vite + Tailwind + React Router + Framer Motion + Recharts + Leaflet
-- **Server**: Node.js + Express + MongoDB (Mongoose) + Socket.IO + Zod validation
+## Tech Stack
+- **Frontend**: React (with Vite)
+- **Backend**: Node.js, Express
+- **Database**: MongoDB (Mongoose)
+- **Real-Time capabilities**: Socket.io
 
-## Requirements
-- Node.js 18+
-- MongoDB (local or Atlas)
+## Repository Structure
+- `/client` - Contains the React Vite frontend application.
+- `/server` - Contains the Node.js Express backend application.
 
-## 1) Setup
+## Setup Instructions
 
-### A) Configure environment
+### 1. Prerequisites
+Ensure you have the following installed:
+- Node.js (v18+)
+- MongoDB (running locally or via MongoDB Atlas)
 
-**Server**: copy and edit:
+### 2. Environment Variables Required
+You will need to set up `.env` files for both the client and server. Use the `.env.example` templates provided in both the `/client` and `/server` directories.
+
+**Server Required Variables (`/server/.env`):**
+```env
+PORT=5000
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+CLIENT_URL=http://localhost:5173
+```
+
+**Client Required Variables (`/client/.env`):**
+```env
+VITE_API_URL=http://localhost:5000/api
+```
+
+### 3. Running Locally
+**Terminal 1 (Backend):**
 ```bash
 cd server
-cp .env.example .env
-```
-
-Key variables:
-- `MONGO_URI` (required)
-- `JWT_SECRET` (required)
-- `PORT` (default 5000)
-
-**Client**: (optional)
-Create `client/.env` if you want a custom API URL:
-```bash
-VITE_API_URL=http://localhost:5000
-```
-
-### B) Install dependencies
-From the project root:
-```bash
 npm install
-npm run install:all
+npm run dev
 ```
 
-### C) Seed dummy data
+**Terminal 2 (Frontend):**
 ```bash
-npm run seed
+cd client
+npm install
+npm run dev
 ```
 
-### D) Run the app
-```bash
-npm start
-```
+## Deployment Steps
 
-- Client: `http://localhost:5173`
-- Server: `http://localhost:5000`
+This repository is optimized for deployment using **Render** (for the backend & frontend) and **Cloudflare** (for domain management/CDN).
 
-## Demo Accounts
-- **Admin**: `admin@medoswift.dev` / `Admin@123`
-- **User**: `user@medoswift.dev` / `User@1234`
-- **Doctor**: `aditi@medoswift.dev` / `Doctor@123`
+### 1. Backend on Render (Web Service)
+- Connect your GitHub repository to Render.
+- Create a new **Web Service**.
+- **Root Directory**: `server`
+- **Build Command**: `npm install`
+- **Start Command**: `node src/server.js`
+- **Environment Variables**: Add your `MONGO_URI`, `JWT_SECRET`, `CLIENT_URL` (your frontend domain), etc.
 
-## Notes
-- **Maps**: Uses Leaflet + OpenStreetMap tiles (no API key required).
-- **OCR**: Uses Tesseract.js for images and `pdf-parse` for PDF text extraction.
-- **Payments**: Mock payment is implemented; Stripe can be integrated by extending the payment endpoint.
+### 2. Frontend on Render (Static Site)
+- Create a new **Static Site** on Render.
+- **Root Directory**: `client`
+- **Build Command**: `npm install && npm run build`
+- **Publish Directory**: `client/dist`
+- **Environment Variables**: Add `VITE_API_URL` pointing to your deployed backend URL.
 
+### 3. Cloudflare Configuration
+- Add your deployed frontend URL to Cloudflare.
+- Configure DNS settings and SSL/TLS encryption mode to **Full (strict)**.
+- Implement any necessary Page Rules or WAF rules for enhanced security.
+
+---
+*Note: This repository does not commit `node_modules/` or `.env` files to ensure strict security and smaller repository size.*
