@@ -61,6 +61,7 @@ export function createApp() {
   app.use(cookieParser());
 
   app.get("/health", (_req, res) => res.json({ ok: true, name: "MedoSwift API" }));
+  app.get("/", (_req, res) => res.send("Medoswift API running 🚀"));
 
   app.use("/uploads", express.static(uploadsPath));
 
