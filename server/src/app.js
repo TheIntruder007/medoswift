@@ -27,7 +27,7 @@ import searchRoutes from "./routes/search.routes.js";
 import adminRoutes from "./routes/admin.routes.js";
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __dirname = path.resolve(path.dirname(__filename), "..");
 
 export function createApp() {
   const app = express();
@@ -63,7 +63,7 @@ export function createApp() {
   app.get("/health", (_req, res) => res.json({ ok: true, name: "MedoSwift API" }));
   app.get("/", (_req, res) => res.send("Medoswift API running 🚀"));
 
-  app.use("/uploads", express.static(uploadsPath));
+  app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
   app.use("/api/auth", authRoutes);
   app.use("/api/users", userRoutes);
